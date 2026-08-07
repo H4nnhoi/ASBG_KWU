@@ -13,10 +13,60 @@ python3 serve.py 8080     # 포트 지정
 CDN에서 받아오고 로컬 폰트도 CORS에 걸리기 때문에 **HTTP로 서빙해야** 합니다.
 따라서 첫 로드에는 **인터넷 연결이 필요**합니다.
 
+## Claude Design 수정 내용 가져오기
+
+Claude Design 문서에는 자동 동기화 API가 없습니다 (`DesignSync` 도구는
+design-system 타입 프로젝트만 다룹니다). 웹에서 수정했다면 내보내기 zip을 받아
+`AWS Student Builder 웹사이트/` 폴더를 통째로 교체하면 됩니다.
+
+⚠️ **로컬에서 `.dc.html` 을 직접 고치면 다음 교체 때 사라집니다.** 디자인/구조 변경은
+웹에서 하고, 로컬은 확인용으로 쓰는 것이 안전합니다.
+
+## Cloudflare Pages 배포
+
+내보내기 결과를 **그대로 올리면 안 됩니다.** `build.py` 가 배포 가능한 `dist/` 를 만듭니다.
+
+```bash
+python3 build.py                                          # dist/ 생성
+npx wrangler pages deploy dist --project-name asbg-kwu    # 배포
+```
+
+`build.py` 가 하는 일:
+
+| 처리 | 이유 |
+|---|---|
+| `ASBG Landing.dc.html` → `index.html` | Pages 는 `index.html` 을 찾음. 파일명 공백도 제거 |
+| `uploads/`, `scraps/`, `.thumbnail` 제외 | AWS PPT 템플릿·원본 이미지가 공개 URL 로 노출되는 것 방지 (21MB → 1MB) |
+| `<title>`, `lang="ko"`, description, og 태그, favicon 주입 | 원본에 전혀 없음. 공유 시 미리보기·검색 노출 |
+| React UMD 를 `vendor/` 로컬 파일로 전환 | unpkg 장애 시 사이트가 빈 화면이 되는 것 방지 |
+| `_headers` 생성 | `assets/`·`vendor/` 는 1년 캐시, 보안 헤더 |
+
+React 는 `support.js` 의 `window.__resources` 훅으로 갈아끼웁니다. **`__resources` 선언이
+`support.js` 태그보다 앞에 와야** 하며, `build.py` 가 그 순서를 보장합니다.
+
+Babel 은 로드되지 않습니다 (JSX `x-import` 가 있을 때만 받아옴).
+
+dist 미리보기:
+
+```bash
+cd dist && python3 -m http.server 5174
+```
+
+### 배포 전 확인
+
+- 배포 주소는 `https://asbg-kwu.pages.dev` (`build.py` 의 `PROJECT` 로 결정)
+- **커스텀 도메인 연결 시 `build.py` 의 `SITE_URL` 교체** 후 재빌드 — og:url 이 어긋납니다
+- 지원 폼 URL (`href="#"` 상태로 배포하면 CTA 가 죽어 있음)
+- 활동 사진 (현재 placeholder)
+- Pretendard·Archivo·IBM Plex Mono 는 여전히 외부 CDN 입니다. 폰트라 실패해도
+  fallback 으로 동작하지만, 완전히 자립시키려면 이것도 vendor 로 내려야 합니다
+
 ## 구성
 
 ```
 serve.py                          로컬 개발 서버 (의존성 없음)
+build.py                          Cloudflare Pages 배포용 dist/ 빌드
+vendor/                           React UMD (CDN 대체)
 DESIGN_BRIEF.md                   디자인 브리프 (구조/모션 스펙)
 AWS Student Builder 웹사이트/      Claude Design 내보내기 결과
   ├─ ASBG Landing.dc.html         마크업 + 하단 <script>에 데이터/로직

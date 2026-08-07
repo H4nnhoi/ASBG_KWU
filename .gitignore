@@ -1,15 +1,3 @@
-# macOS
 .DS_Store
-
-# Python cache
-__pycache__/
-*.py[cod]
-
-# Design-tool previews and source/reference files
-**/.thumbnail
-**/scraps/
-**/uploads/
-
-# Website photos belong in assets/photos/ and should be committed.
-!**/assets/photos/
-!**/assets/photos/**
+dist/
+AWS Student Builder 웹사이트/uploads/

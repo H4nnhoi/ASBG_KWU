@@ -18,22 +18,33 @@
 @font-face{font-family:'Amazon Ember';src:url('assets/AmazonEmber_Bd.ttf') format('truetype');font-weight:700;font-display:swap}
 @font-face{font-family:'Amazon Ember Mono';src:url('assets/AmazonEmberMono_Bd.ttf') format('truetype');font-weight:700;font-display:swap}
 html{scroll-behavior:smooth;background:#141D26}
-body{margin:0;background:#141D26;color:#fff;font-family:'Pretendard Variable',Pretendard,'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#141D26;color:#fff;font-family:'Pretendard Variable',Pretendard,'Amazon Ember Display',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 a{color:#00E582;text-decoration:none}
 a:hover{color:#5CFFB4}
 @keyframes ringPulse{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(3);opacity:0}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+[data-reveal]{animation:fadeUp .55s cubic-bezier(.67,.33,.23,1.02) both}
+[data-reveal]:nth-of-type(2){animation-delay:70ms}
+[data-reveal]:nth-of-type(3){animation-delay:140ms}
+[data-reveal]:nth-of-type(4){animation-delay:210ms}
+[data-reveal]:nth-of-type(5){animation-delay:280ms}
 @media (max-width:960px){
  [data-hero-grid],[data-section-grid],[data-footer-grid]{grid-template-columns:1fr !important;gap:40px !important}
  [data-cards-3]{grid-template-columns:1fr !important}
  [data-nav-links]{display:none !important}
  [data-menu-btn]{display:flex !important;align-items:center;justify-content:center}
- [data-hero-h1]{font-size:56px !important}
+ nav > div{padding:0 20px !important;gap:12px !important}
+ nav > div > span{gap:10px !important;flex:0 0 auto}
+ nav a[href="#top"]{gap:10px !important;flex:0 1 auto;min-width:0;overflow:hidden}
+ nav a[href="#top"] span{font-size:13px !important;min-width:0;overflow:hidden;text-overflow:ellipsis}
  [data-hero-side]{align-items:flex-start !important;justify-content:flex-start !important}
  [data-hero-side] span{text-align:left !important}
  [data-big]{font-size:30px !important}
  [data-corner]{display:none !important}
+}
+@media (max-width:520px){
+ nav a[href="#top"] span{display:none !important}
 }
 @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}html{scroll-behavior:auto}}
 </style>
@@ -43,20 +54,28 @@ a:hover{color:#5CFFB4}
 <div style="min-height:100vh;overflow-x:hidden;background:#141D26">
 
 <nav style="position:sticky;top:0;z-index:50;background:rgba(20,29,38,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.14)">
-  <div style="max-width:1360px;margin:0 auto;padding:0 40px;height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+  <div style="max-width:1720px;margin:0 auto;padding:0 56px;height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px">
     <a href="#top" style="display:flex;align-items:center;gap:18px;color:#fff">
       <img src="assets/program-icon-mint.svg" alt="" style="height:32px;width:auto">
-      <span style="font-family:'Archivo',sans-serif;font-size:16px;font-weight:600;letter-spacing:-.01em;color:#fff;white-space:nowrap">AWS Student Builder Group</span>
+      <span style="font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:16px;font-weight:600;letter-spacing:-.01em;color:#fff;white-space:nowrap">AWS Student Builder Group</span>
     </a>
-    <div style="display:flex;align-items:center;gap:32px" data-nav-links>
-      <a href="#about" style="color:#C9D1D9;font-size:14px;font-weight:600">소개</a>
-      <a href="#recruiting" style="color:#C9D1D9;font-size:14px;font-weight:600">모집</a>
-      <a href="#future" style="color:#C9D1D9;font-size:14px;font-weight:600">활동</a>
-      <a href="#past" style="color:#C9D1D9;font-size:14px;font-weight:600">지난 기수</a>
-      <a href="#faq" style="color:#C9D1D9;font-size:14px;font-weight:600">FAQ</a>
-      <a href="#apply" style="background:#00E582;color:#141D26;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;padding:14px 24px;transition:background .18s ease" style-hover="background:#5CFFB4">지원하기</a>
-    </div>
-    <button type="button" onClick="{{ toggleMenu }}" aria-label="메뉴" style="display:none;background:none;border:1px solid rgba(255,255,255,.2);color:#fff;width:46px;height:46px;font-size:18px;cursor:pointer" data-menu-btn>≡</button>
+    <span style="display:flex;align-items:center;gap:36px">
+      <span style="display:flex;align-items:center;gap:32px" data-nav-links>
+        <a href="#about" style="color:#C9D1D9;font-size:14px;font-weight:600">소개</a>
+        <a href="#recruiting" style="color:#C9D1D9;font-size:14px;font-weight:600">모집</a>
+        <a href="#future" style="color:#C9D1D9;font-size:14px;font-weight:600">활동</a>
+        <a href="#past" style="color:#C9D1D9;font-size:14px;font-weight:600">지난 기수</a>
+        <a href="#faq" style="color:#C9D1D9;font-size:14px;font-weight:600">FAQ</a>
+      </span>
+  <a href="https://instagram.com/aws.sbg.kwu" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.24);color:#fff;transition:border-color .18s ease,color .18s ease,background .18s ease" style-hover="border-color:#00E582;color:#00E582;background:rgba(0,229,130,.08)">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle>
+          </svg>
+        </a>
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="메뉴" style="display:none;background:none;border:1px solid rgba(255,255,255,.2);color:#fff;width:46px;height:46px;font-size:18px;cursor:pointer" data-menu-btn>≡</button>
+    </span>
   </div>
 </nav>
 
@@ -72,48 +91,55 @@ a:hover{color:#5CFFB4}
   </div>
 </sc-if>
 
-<header id="top" style="position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.14);background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:160px 160px;background-position:center top">
+<header id="top" style="position:relative;overflow:hidden;min-height:calc(100dvh - 84px);display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.14);background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:160px 160px;background-position:center top">
   <div data-corner style="position:absolute;top:0;left:0;width:120px;height:64px;background:#00E582"></div>
   <div data-corner style="position:absolute;top:0;right:0;width:200px;height:64px;background:#00E582"></div>
   <div data-corner style="position:absolute;bottom:0;left:0;width:64px;height:56px;background:#00E582"></div>
-  <div style="position:relative;max-width:1360px;margin:0 auto;padding:150px 40px 130px;display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center" data-hero-grid>
-    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:36px">
-      <span style="display:flex;align-items:center;gap:14px;font-family:'Archivo',sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;color:#7C8894">
+  <div style="position:relative;width:100%;max-width:1720px;margin:0 auto;padding:110px 56px;display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center" data-hero-grid>
+    <div style="container-type:inline-size;display:flex;flex-direction:column;align-items:flex-start;gap:36px">
+      <span style="display:flex;align-items:center;gap:14px;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;color:#7C8894">
         <span style="width:40px;height:1px;background:rgba(255,255,255,.3)"></span>KWANGWOON UNIVERSITY · SEOUL
       </span>
-      <h1 style="margin:0;font-family:'Archivo',sans-serif;font-size:132px;line-height:.9;letter-spacing:-.05em;font-weight:700;text-transform:uppercase" data-hero-h1>
+      <h1 style="margin:0;font-family:'Archivo',sans-serif;font-size:min(20cqw,132px);line-height:.9;letter-spacing:-.05em;font-weight:700;text-transform:uppercase" data-hero-h1>
         AWS<br>Student<br>Builder<br><span style="display:inline-flex;align-items:center;gap:.18em"><span style="color:#00E582">Group</span><img src="assets/program-icon-mint.svg" alt="" style="height:.78em;width:auto;position:relative;top:-.04em"></span>
       </h1>
     </div>
     <div data-hero-side style="display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:24px">
-      <a id="apply" href="#" target="_blank" rel="noopener" style="background:#00E582;color:#141D26;font-family:'Archivo',sans-serif;font-weight:600;font-size:17px;letter-spacing:.02em;padding:22px 40px;transition:background .18s ease" style-hover="background:#5CFFB4">Apply now — {{ cohortKo }} 모집</a>
-      <a href="#recruiting" style="border:1px solid rgba(255,255,255,.28);color:#fff;font-family:'Archivo',sans-serif;font-weight:500;font-size:16px;padding:19px 32px;transition:border-color .18s ease,color .18s ease" style-hover="border-color:#00E582;color:#00E582">View schedule</a>
-      <span style="font-family:'Archivo',sans-serif;font-size:12px;font-weight:500;letter-spacing:.2em;color:#7C8894;text-align:right">EST. 2024 — {{ cohortKo }}</span>
+      <a id="apply" href="#" target="_blank" rel="noopener" style="background:#00E582;color:#141D26;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-weight:600;font-size:17px;letter-spacing:.02em;padding:22px 40px;transition:background .18s ease" style-hover="background:#5CFFB4">Apply now — {{ cohortKo }} 모집</a>
+      <a href="#recruiting" style="border:1px solid rgba(255,255,255,.28);color:#fff;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-weight:500;font-size:16px;padding:19px 32px;transition:border-color .18s ease,color .18s ease" style-hover="border-color:#00E582;color:#00E582">View schedule</a>
+      <span style="font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:12px;font-weight:500;letter-spacing:.2em;color:#7C8894;text-align:right">EST. 2024 — {{ cohortKo }}</span>
     </div>
   </div>
 </header>
 
-<section id="about" style="border-bottom:1px solid rgba(255,255,255,.14)">
-  <div style="max-width:1360px;margin:0 auto;padding:130px 40px;display:grid;grid-template-columns:300px 1fr;gap:64px" data-section-grid>
-    <div data-reveal style="display:flex;flex-direction:column;gap:16px">
-      <span style="width:56px;height:14px;background:#00E582"></span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;color:#00E582">ABOUT US</span>
+<section id="about" style="background:#F2EFE9;color:#141D26;border-bottom:1px solid rgba(255,255,255,.14)">
+  <div style="max-width:1720px;margin:0 auto;padding:110px 56px 130px;display:flex;flex-direction:column;gap:0">
+    <div style="border-top:1px solid rgba(20,29,38,.35);padding-top:20px;display:flex;align-items:center;gap:80px" data-reveal>
+      <span style="display:flex;align-items:center;gap:14px;font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;color:#141D26">
+        <span style="width:9px;height:9px;background:#141D26"></span>ABOUT US
+      </span>
+      <span style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;color:#6B7280">01 / 05</span>
     </div>
-    <div style="display:flex;flex-direction:column;gap:34px;max-width:820px">
-      <h2 style="margin:0;font-family:'Archivo','Pretendard Variable',sans-serif;font-size:42px;line-height:1.32;letter-spacing:-.03em;font-weight:700;text-wrap:pretty" data-reveal data-big>
-        만들어 본 사람만이<br>아는 것들이 있습니다.
+    <div style="display:grid;grid-template-columns:1.35fr .65fr;gap:96px;align-items:start;padding:100px 0 110px" data-section-grid>
+      <h2 style="margin:0;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:60px;line-height:1.26;letter-spacing:-.04em;font-weight:700;text-wrap:pretty;color:#141D26" data-reveal data-big>
+        AWS를 배우는 가장 좋은 방법은<br><span style="background:#00E582;padding:0 .08em">직접 만들어 보는 것</span>이라 믿습니다.
       </h2>
-      <p style="margin:0;font-size:19px;line-height:1.9;color:#B4BEC8;text-wrap:pretty" data-reveal>
-        AWS Student Builder Group은 AWS가 지원하는 학생 빌더 커뮤니티입니다. 광운대학교에서 운영되며, 클라우드·AI·데이터·개발을 아우르는 범위 안에서 학생들이 직접 배우고 만들고 공유합니다. 전공도, 학년도, 시작점도 묻지 않습니다. 필요한 건 무언가 만들어 보고 싶다는 마음뿐입니다.
-      </p>
-      <p style="margin:0;font-size:19px;line-height:1.9;color:#B4BEC8;text-wrap:pretty" data-reveal>
-        학기 중에는 매주 정기 세션으로 핸즈온과 발표를 이어가고, 관심사가 맞는 사람끼리 소모임을 열어 프로젝트나 취업 준비를 함께합니다. 여기에 타 학교 빌더 그룹과의 연합 세션, 현업 엔지니어를 초청한 커리어 토크가 더해집니다. 한 학기가 지나면 이력서에 쓸 수 있는 결과물 하나쯤은 남습니다.
-      </p>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,.14)" data-reveal>
-        <span style="padding:20px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:#00E582;border-right:1px solid rgba(255,255,255,.14)">CLOUD</span>
-        <span style="padding:20px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:#00E582;border-right:1px solid rgba(255,255,255,.14)">AI</span>
-        <span style="padding:20px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:#00E582;border-right:1px solid rgba(255,255,255,.14)">DATA</span>
-        <span style="padding:20px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:#00E582">DEV</span>
+      <div style="display:flex;flex-direction:column;gap:26px" data-reveal>
+        <p style="margin:0;font-size:17px;line-height:2;color:#3F4A56;text-wrap:pretty">
+          <strong style="color:#141D26;font-weight:700">AWS Student Builder Group</strong>은 AWS와 클라우드 기술에 관심 있는 대학생들이 모여 함께 배우고, 만들고, 성장하는 학생 빌더 커뮤니티입니다.
+        </p>
+        <p style="margin:0;font-size:17px;line-height:2;color:#3F4A56;text-wrap:pretty">
+          정기 세션부터 프로젝트, 커리어 토크, 타 학교와의 연합 활동까지. 경험의 깊이보다 새로운 것을 향한 호기심을 나눕니다. 전공도, 학년도, 시작점도 묻지 않습니다.
+        </p>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(20,29,38,.35);padding-top:70px" data-reveal>
+      <div style="container-type:inline-size;display:flex;align-items:center;justify-content:space-between;gap:2.2cqw;font-family:'Archivo','Amazon Ember Display',sans-serif;font-size:6.1cqw;line-height:.92;letter-spacing:-.045em;font-weight:700;text-transform:uppercase;color:#141D26;white-space:nowrap">
+        <span>Learn</span>
+        <span style="color:#00E582">+</span>
+        <span>Build</span>
+        <span style="color:#00E582">+</span>
+        <span>Connect</span>
       </div>
     </div>
   </div>
@@ -121,44 +147,46 @@ a:hover{color:#5CFFB4}
 
 <section id="recruiting" style="position:relative;border-bottom:1px solid rgba(255,255,255,.14);background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:160px 160px">
   <div data-corner style="position:absolute;top:0;right:0;width:160px;height:48px;background:#00E582"></div>
-  <div style="position:relative;max-width:1360px;margin:0 auto;padding:130px 40px;display:grid;grid-template-columns:300px 1fr;gap:64px" data-section-grid>
-    <div style="display:flex;flex-direction:column;gap:16px" data-reveal>
-      <span style="width:56px;height:14px;background:#00E582"></span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;color:#00E582">RECRUITING</span>
-      <h2 style="margin:10px 0 0;font-family:'Archivo','Pretendard Variable',sans-serif;font-size:34px;letter-spacing:-.03em;font-weight:700">리크루팅 일정</h2>
+  <div style="position:relative;max-width:1720px;margin:0 auto;padding:130px 56px;display:grid;grid-template-columns:320px 1fr;gap:88px" data-section-grid>
+    <div style="display:flex;flex-direction:column;gap:18px" data-reveal>
+      <span style="font-family:'Archivo','Amazon Ember Display',sans-serif;font-size:96px;line-height:.85;letter-spacing:-.05em;font-weight:700;color:rgba(255,255,255,.14)">02</span>
+      <span style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;color:#00E582">RECRUITING</span>
+      <h2 style="margin:0;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:34px;letter-spacing:-.03em;font-weight:700">리크루팅 일정</h2>
       <p style="margin:0;font-size:14px;line-height:1.7;color:#7C8894">날짜는 확정 시 업데이트됩니다.</p>
     </div>
-    <div style="display:flex;flex-direction:column;max-width:880px;border-top:1px solid rgba(255,255,255,.14)">
+    <div style="display:flex;flex-direction:column;max-width:1240px;border-top:1px solid rgba(255,255,255,.14)">
       <sc-for list="{{ steps }}" as="step" hint-placeholder-count="6">
         <div data-reveal style="display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;padding:26px 8px;border-bottom:1px solid rgba(255,255,255,.14)">
           <span style="{{ step.numStyle }}">{{ step.no }}</span>
           <span style="display:flex;align-items:center;gap:14px;font-size:21px;font-weight:700;letter-spacing:-.02em;color:#fff">
             {{ step.name }}
             <sc-if value="{{ step.current }}" hint-placeholder-val="{{ false }}">
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#141D26;background:#00E582;padding:5px 9px">NOW</span>
+              <span style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#141D26;background:#00E582;padding:5px 9px">NOW</span>
             </sc-if>
           </span>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;color:#A9B4BF;white-space:nowrap">{{ step.date }}</span>
+          <span style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:15px;color:#A9B4BF;white-space:nowrap">{{ step.date }}</span>
         </div>
       </sc-for>
-      <a href="#apply" style="align-self:flex-start;margin-top:44px;background:#00E582;color:#141D26;font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;padding:18px 32px;transition:background .18s ease" style-hover="background:#5CFFB4">지원서 작성하기 →</a>
+      <a href="#apply" style="align-self:flex-start;margin-top:44px;background:#00E582;color:#141D26;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-weight:700;font-size:16px;padding:18px 32px;transition:background .18s ease" style-hover="background:#5CFFB4">지원서 작성하기 →</a>
     </div>
   </div>
 </section>
 
 <section id="future" style="border-bottom:1px solid rgba(255,255,255,.14)">
-  <div style="max-width:1360px;margin:0 auto;padding:130px 40px;display:flex;flex-direction:column;gap:56px">
-    <div style="display:flex;flex-direction:column;gap:16px" data-reveal>
-      <span style="width:56px;height:14px;background:#00E582"></span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;color:#00E582">FUTURE</span>
-      <h2 style="margin:10px 0 0;font-family:'Archivo','Pretendard Variable',sans-serif;font-size:42px;letter-spacing:-.03em;font-weight:700" data-big>{{ cohortKo }} 예정 활동</h2>
+  <div style="max-width:1720px;margin:0 auto;padding:130px 56px;display:flex;flex-direction:column;gap:56px">
+    <div style="display:flex;flex-direction:column;gap:24px;border-top:1px solid rgba(255,255,255,.14);padding-top:28px" data-reveal>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:32px;flex-wrap:wrap">
+        <span style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;color:#00E582">03 / WHAT WE DO</span>
+        <span style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;color:#7C8894">{{ cohortKo }}</span>
+      </div>
+      <h2 style="margin:0;font-family:'Archivo','Amazon Ember Display',sans-serif;font-size:clamp(44px,7vw,124px);line-height:.94;letter-spacing:-.045em;font-weight:700;text-transform:uppercase" data-big>Sessions,<br>Crews &amp; <span style="color:#00E582">Meetups</span></h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,.14)" data-cards-3>
       <div data-reveal style="display:flex;flex-direction:column;gap:20px;padding:40px 34px;border-right:1px solid rgba(255,255,255,.14);transition:background .2s ease" style-hover="background:rgba(0,229,130,.05)">
         <img src="assets/icon-bolt.svg" alt="" style="height:36px;width:auto;align-self:flex-start">
-        <h3 style="margin:0;font-family:'Archivo','Pretendard Variable',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.02em">정기 세션</h3>
+        <h3 style="margin:0;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.02em">정기 세션</h3>
         <p style="margin:0;font-size:15px;line-height:1.8;color:#A9B4BF">매주 모여 회차별 커리큘럼을 따라갑니다. 입문 핸즈온에서 시작해 자유 발표로 마무리합니다.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:auto;padding-top:24px;border-top:1px dashed rgba(255,255,255,.2);font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8B96A2">
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:auto;padding-top:24px;border-top:1px dashed rgba(255,255,255,.2);font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;color:#8B96A2">
           <span>01 — 클라우드 입문 핸즈온</span>
           <span>02 — 서비스 배포 실습</span>
           <span>03 — 자유 주제 발표</span>
@@ -166,15 +194,15 @@ a:hover{color:#5CFFB4}
       </div>
       <div data-reveal style="display:flex;flex-direction:column;gap:20px;padding:40px 34px;border-right:1px solid rgba(255,255,255,.14);transition:background .2s ease" style-hover="background:rgba(0,229,130,.05)">
         <img src="assets/icon-teams.svg" alt="" style="height:36px;width:auto;align-self:flex-start">
-        <h3 style="margin:0;font-family:'Archivo','Pretendard Variable',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.02em">소모임</h3>
+        <h3 style="margin:0;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.02em">소모임</h3>
         <p style="margin:0;font-size:15px;line-height:1.8;color:#A9B4BF">프로젝트, 취업 준비, 취미까지 누구나 자유롭게 개설합니다. 두 명만 모이면 시작할 수 있습니다.</p>
-        <span style="margin-top:auto;padding-top:24px;border-top:1px dashed rgba(255,255,255,.2);font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8B96A2">자율 개설 · 기수 내 상시</span>
+        <span style="margin-top:auto;padding-top:24px;border-top:1px dashed rgba(255,255,255,.2);font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;color:#8B96A2">자율 개설 · 기수 내 상시</span>
       </div>
       <div data-reveal style="display:flex;flex-direction:column;gap:20px;padding:40px 34px;transition:background .2s ease" style-hover="background:rgba(0,229,130,.05)">
         <img src="assets/icon-speaker.svg" alt="" style="height:36px;width:auto;align-self:flex-start">
-        <h3 style="margin:0;font-family:'Archivo','Pretendard Variable',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.02em">연합 세션</h3>
+        <h3 style="margin:0;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.02em">연합 세션</h3>
         <p style="margin:0;font-size:15px;line-height:1.8;color:#A9B4BF">타 학교 빌더 그룹과 교류하고, 현업 엔지니어를 초청해 커리어 토크를 엽니다.</p>
-        <span style="margin-top:auto;padding-top:24px;border-top:1px dashed rgba(255,255,255,.2);font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8B96A2">학기당 1~2회</span>
+        <span style="margin-top:auto;padding-top:24px;border-top:1px dashed rgba(255,255,255,.2);font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;color:#8B96A2">학기당 1~2회</span>
       </div>
     </div>
   </div>
@@ -182,19 +210,18 @@ a:hover{color:#5CFFB4}
 
 <section id="past" style="position:relative;border-bottom:1px solid rgba(255,255,255,.14);background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:160px 160px">
   <div data-corner style="position:absolute;bottom:0;left:0;width:120px;height:48px;background:#00E582"></div>
-  <div style="position:relative;max-width:1360px;margin:0 auto;padding:130px 40px;display:flex;flex-direction:column;gap:40px">
+  <div style="position:relative;max-width:1720px;margin:0 auto;padding:130px 56px;display:flex;flex-direction:column;gap:40px">
     <div style="display:flex;flex-direction:column;gap:16px" data-reveal>
-      <span style="width:56px;height:14px;background:#00E582"></span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;color:#00E582">PAST</span>
-      <h2 style="margin:10px 0 0;font-family:'Archivo','Pretendard Variable',sans-serif;font-size:42px;letter-spacing:-.03em;font-weight:700" data-big>지난 기수 활동</h2>
+      <span style="display:flex;align-items:center;gap:14px;font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;color:#00E582"><span style="width:36px;height:1px;background:rgba(0,229,130,.5)"></span>04 / PAST</span>
+      <h2 style="margin:10px 0 0;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:42px;letter-spacing:-.03em;font-weight:700" data-big>지난 기수 활동</h2>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:0;border:1px solid rgba(255,255,255,.14);align-self:flex-start">
       <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="4">
         <sc-if value="{{ tab.active }}" hint-placeholder-val="{{ true }}">
-          <button type="button" onClick="{{ tab.select }}" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;padding:15px 26px;cursor:pointer;border:0;border-right:1px solid rgba(255,255,255,.14);background:#00E582;color:#141D26">{{ tab.label }}</button>
+          <button type="button" onClick="{{ tab.select }}" style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;padding:15px 26px;cursor:pointer;border:0;border-right:1px solid rgba(255,255,255,.14);background:#00E582;color:#141D26">{{ tab.label }}</button>
         </sc-if>
         <sc-if value="{{ tab.inactive }}" hint-placeholder-val="{{ false }}">
-          <button type="button" onClick="{{ tab.select }}" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;padding:15px 26px;cursor:pointer;border:0;border-right:1px solid rgba(255,255,255,.14);background:transparent;color:#98A3AE;transition:color .18s ease" style-hover="color:#00E582">{{ tab.label }}</button>
+          <button type="button" onClick="{{ tab.select }}" style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;padding:15px 26px;cursor:pointer;border:0;border-right:1px solid rgba(255,255,255,.14);background:transparent;color:#98A3AE;transition:color .18s ease" style-hover="color:#00E582">{{ tab.label }}</button>
         </sc-if>
       </sc-for>
     </div>
@@ -208,7 +235,7 @@ a:hover{color:#5CFFB4}
           </sc-if>
           <sc-if value="{{ item.noPhoto }}" hint-placeholder-val="{{ false }}">
             <div style="width:100%;aspect-ratio:16/10;border-bottom:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;padding:20px">
-              <span style="width:100%;height:100%;border:1px dashed rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;color:#6B7683">NO PHOTO</span>
+              <span style="width:100%;height:100%;border:1px dashed rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;color:#6B7683">NO PHOTO</span>
             </div>
           </sc-if>
           <div style="display:flex;flex-direction:column;gap:12px;padding:26px 24px">
@@ -223,13 +250,13 @@ a:hover{color:#5CFFB4}
 </section>
 
 <section id="faq" style="border-bottom:1px solid rgba(255,255,255,.14)">
-  <div style="max-width:1360px;margin:0 auto;padding:130px 40px;display:grid;grid-template-columns:300px 1fr;gap:64px" data-section-grid>
-    <div style="display:flex;flex-direction:column;gap:16px" data-reveal>
-      <span style="width:56px;height:14px;background:#00E582"></span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.24em;color:#00E582">FAQ</span>
-      <h2 style="margin:10px 0 0;font-family:'Archivo','Pretendard Variable',sans-serif;font-size:34px;letter-spacing:-.03em;font-weight:700;text-wrap:pretty">자주 들어오는 질문</h2>
+  <div style="max-width:1720px;margin:0 auto;padding:130px 56px;display:grid;grid-template-columns:320px 1fr;gap:88px" data-section-grid>
+    <div style="display:flex;flex-direction:column;gap:18px" data-reveal>
+      <span style="font-family:'Archivo','Amazon Ember Display',sans-serif;font-size:96px;line-height:.85;letter-spacing:-.05em;font-weight:700;color:rgba(255,255,255,.14)">05</span>
+      <span style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;letter-spacing:.28em;color:#00E582">FAQ</span>
+      <h2 style="margin:0;font-family:'Amazon Ember Display','Pretendard Variable',sans-serif;font-size:34px;letter-spacing:-.03em;font-weight:700;text-wrap:pretty">자주 들어오는 질문</h2>
     </div>
-    <div style="display:flex;flex-direction:column;max-width:880px;border-top:1px solid rgba(255,255,255,.14)">
+    <div style="display:flex;flex-direction:column;max-width:1240px;border-top:1px solid rgba(255,255,255,.14)">
       <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="6">
         <div style="border-bottom:1px solid rgba(255,255,255,.14)">
           <button type="button" onClick="{{ q.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;background:none;border:0;padding:28px 8px;cursor:pointer;text-align:left;color:#fff;font-family:inherit;font-size:18px;font-weight:700;letter-spacing:-.02em">
@@ -252,15 +279,14 @@ a:hover{color:#5CFFB4}
 
 <footer style="position:relative;background:#111921;overflow:hidden">
   <div data-corner style="position:absolute;top:0;right:0;width:200px;height:56px;background:#00E582"></div>
-  <div style="position:relative;max-width:1360px;margin:0 auto;padding:96px 40px;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:start" data-footer-grid>
+  <div style="position:relative;max-width:1720px;margin:0 auto;padding:96px 56px;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:start" data-footer-grid>
     <div style="display:flex;flex-direction:column;gap:24px;max-width:560px">
       <img src="assets/brandmark-white.svg" alt="AWS Student Builder Group" style="height:52px;width:auto;align-self:flex-start">
       <p style="margin:0;font-size:15px;line-height:1.8;color:#8B96A2">광운대학교에서 운영되는 AWS Student Builder Group입니다.</p>
-      <a href="https://instagram.com/aws.sbg.kwu" target="_blank" rel="noopener" style="align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#C9D1D9;border:1px solid rgba(255,255,255,.2);padding:12px 16px;transition:color .18s ease,border-color .18s ease" style-hover="color:#00E582;border-color:#00E582">@aws.sbg.kwu</a>
+      <a href="https://instagram.com/aws.sbg.kwu" target="_blank" rel="noopener" style="align-self:flex-start;font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#C9D1D9;border:1px solid rgba(255,255,255,.2);padding:12px 16px;transition:color .18s ease,border-color .18s ease" style-hover="color:#00E582;border-color:#00E582">@aws.sbg.kwu</a>
     </div>
     <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
-      <a href="#apply" style="background:#00E582;color:#141D26;font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;padding:18px 30px;transition:background .18s ease" style-hover="background:#5CFFB4">지원하기 →</a>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#5E6874">© 2026 AWS STUDENT BUILDER GROUP · KWANGWOON UNIV.</span>
+      <span style="font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#5E6874">© 2026 AWS STUDENT BUILDER GROUP · KWANGWOON UNIV.</span>
     </div>
   </div>
 </footer>
@@ -308,31 +334,6 @@ const FAQS = [
 class Component extends DCLogic {
   state = { menuOpen: false, tab: '4기', open: {} };
 
-  componentDidMount() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const els = Array.from(document.querySelectorAll('[data-reveal]'));
-    els.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(18px)';
-      el.style.transition = 'opacity .5s ease, transform .5s cubic-bezier(.67,.33,.23,1.02)';
-    });
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const sibs = Array.from(e.target.parentElement.children).filter(n => n.hasAttribute && n.hasAttribute('data-reveal'));
-        const i = Math.max(0, sibs.indexOf(e.target));
-        e.target.style.transitionDelay = Math.min(i, 6) * 70 + 'ms';
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'none';
-        io.unobserve(e.target);
-      });
-    }, { rootMargin: '0px 0px -10% 0px' });
-    els.forEach(el => io.observe(el));
-    this._io = io;
-  }
-
-  componentWillUnmount() { if (this._io) this._io.disconnect(); }
-
   renderVals() {
     const cohort = this.props.cohort ?? 5;
     const currentStep = this.props.currentStep ?? 1;
@@ -349,12 +350,12 @@ class Component extends DCLogic {
       name, date,
       no: String(i + 1).padStart(2, '0'),
       current: i === currentStep,
-      numStyle: "font-family:'IBM Plex Mono',monospace;font-size:13px;padding:6px 0;text-align:center;color:" +
+      numStyle: "font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:13px;padding:6px 0;text-align:center;color:" +
         (i <= currentStep ? '#141D26' : '#6B7683') + ';background:' + (i <= currentStep ? ACCENT : 'transparent') +
         (i <= currentStep ? '' : ';border:1px dashed rgba(255,255,255,.22)')
     }));
 
-    const tabBase = "font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;padding:15px 26px;cursor:pointer;border:0;border-right:1px solid rgba(255,255,255,.14);transition:background .18s ease,color .18s ease";
+    const tabBase = "font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;padding:15px 26px;cursor:pointer;border:0;border-right:1px solid rgba(255,255,255,.14);transition:background .18s ease,color .18s ease";
     const keys = Object.keys(PAST);
     const tabs = keys.map((label, i) => ({
       label,
@@ -368,7 +369,7 @@ class Component extends DCLogic {
       cat: a.cat, title: a.title, desc: a.desc,
       hasPhoto: a.photo, noPhoto: !a.photo,
       slotId: 'past-' + this.state.tab + '-' + i,
-      catStyle: "align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;padding:6px 10px;color:" + ACCENT + ';border:1px solid rgba(0,229,130,.5)'
+      catStyle: "align-self:flex-start;font-family:'Amazon Ember Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;padding:6px 10px;color:" + ACCENT + ';border:1px solid rgba(0,229,130,.5)'
     }));
 
     const faqs = FAQS.map(([question, answer], i) => {
