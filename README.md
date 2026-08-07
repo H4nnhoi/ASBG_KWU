@@ -26,9 +26,22 @@ design-system 타입 프로젝트만 다룹니다). 웹에서 수정했다면 �
 
 내보내기 결과를 **그대로 올리면 안 됩니다.** `build.py` 가 배포 가능한 `dist/` 를 만듭니다.
 
+GitHub 저장소에 push 하면 Cloudflare 가 `npx wrangler deploy` 를 실행합니다.
+빌드 환경은 `build.py` 를 돌리지 않으므로 **`dist/` 를 커밋해서 올려야 합니다.**
+
 ```bash
-python3 build.py                                          # dist/ 생성
-npx wrangler pages deploy dist --project-name asbg-kwu    # 배포
+python3 build.py                    # dist/ 재생성
+git add -A && git commit -m "..."   # dist/ 포함해서 커밋
+git push                            # push 하면 자동 배포
+```
+
+`wrangler.jsonc` 가 `dist/` 를 정적 파일 디렉터리로 지정합니다. 이 파일이 없으면
+`Could not detect a directory containing static files` 로 배포가 실패합니다.
+
+로컬에서 배포하려면:
+
+```bash
+npx wrangler deploy              # 설정 검증만: --dry-run
 ```
 
 `build.py` 가 하는 일:
